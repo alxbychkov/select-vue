@@ -1,12 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Mediapronet</title>
 </head>
 <body>
-    
+    <div class="body-wrapper">
+        <div id="app">
+            <div class="select-wrapper">
+                <div class="select-title">Район</div>
+                <div class="select" @click="selectClickHandler">
+                    <div class="select__text">Не выбрано</div>
+                    <div class="select-dropdown">
+                        <div class="select__input__wrapper">
+                            <span class="icon__search"></span>
+                            <input type="text" class="select__input" name="district" value="" placeholder="Поиск по районам" v-model="inputValue" @click.stop>
+                            <span class="icon__close"></span>
+                        </div>
+                        <div class="select-dropdown__tags">
+                            <div class="tag__item">
+                                <p class="tag__item__title">Ново-Переделкино</p>
+                                <div class="tag__item__close"></div>
+                            </div>
+                            <div class="tag__item">
+                                <p class="tag__item__title">Перово</p>
+                                <div class="tag__item__close"></div>
+                            </div>
+                            <div class="tag__item">
+                                <p class="tag__item__title">Орехово-Матвеевское Северное и Южное</p>
+                                <div class="tag__item__close"></div>
+                            </div>
+                        </div>
+                        <div class="select-dropdown__list">
+                            <label v-for="(disctrict, index) in districts" class="list__item" :key="index">
+                                <input type="checkbox" class="list__item__chechbox" value="{{ disctrict }}">
+                                <span class="list__item__box"></span>
+                                <span class="list__item__value">{{ disctrict }}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-error">Выберите хотя бы один район</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
