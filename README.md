@@ -1,2 +1,2 @@
-# select-vue
-Select component
+# Select component
+
