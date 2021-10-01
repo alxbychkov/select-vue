@@ -10,51 +10,7 @@
 <body>
     <div class="body-wrapper">
         <div id="app">
-            <div class="select-wrapper">
-                <div class="select-title">Район</div>
-                <div class="select" @click.stop="selectClickHandler">
-                    <div class="select__text">{{ showSelectedItems }}</div>
-                    <div class="select-dropdown" @click.stop>
-                        <div class="select__input__wrapper">
-                            <span class="icon__search"></span>
-                            <input type="text" 
-                                class="select__input" 
-                                name="district" 
-                                value="" 
-                                placeholder="Поиск по районам" 
-                                v-model="inputValue" 
-                                @click.stop       
-                            >
-                            <span v-if="inputValue" class="icon__close" @click="inputValue = ''"></span>
-                        </div>
-                        <div v-if="selectedItems.length" class="select-dropdown__tags">
-                            <div v-for="tag in selectedItems" class="tag__item" @click.stop>
-                                <p class="tag__item__title">{{ tag }}</p>
-                                <div class="tag__item__close" @click.stop="removeTag(tag)"></div>
-                            </div>
-                        </div>
-                        <div class="select-dropdown__list">
-                            <label v-for="disctrict in filteredDistricts" 
-                                    class="list__item"
-                                    :class="{disabled: !disctrict.enable}" 
-                                    :key="disctrict.id"
-                            >
-                                <input type="checkbox" 
-                                    class="list__item__chechbox" 
-                                    value="disctrict.name" 
-                                    @change="itemLabelCheck(disctrict)"
-                                    :checked="selectedItems.includes(disctrict.name)"
-                                >
-                                <span class="list__item__box"></span>
-                                <span class="list__item__value" 
-                                        :class="{formated: inputValue}"
-                                        v-html="wrapWord(disctrict.name, inputValue)"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="select-error">Выберите хотя бы один район</div>
-            </div>
+            <custom-select title="Район" msg="Выберите хотя бы один район" @list="onList"></custom-select>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
