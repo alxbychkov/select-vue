@@ -12,33 +12,43 @@
         <div id="app">
             <div class="select-wrapper">
                 <div class="select-title">Район</div>
-                <div class="select" @click="selectClickHandler">
-                    <div class="select__text">Не выбрано</div>
-                    <div class="select-dropdown">
+                <div class="select" @click.stop="selectClickHandler">
+                    <div class="select__text">{{ showSelectedItems }}</div>
+                    <div class="select-dropdown" @click.stop>
                         <div class="select__input__wrapper">
                             <span class="icon__search"></span>
-                            <input type="text" class="select__input" name="district" value="" placeholder="Поиск по районам" v-model="inputValue" @click.stop>
-                            <span class="icon__close"></span>
+                            <input type="text" 
+                                class="select__input" 
+                                name="district" 
+                                value="" 
+                                placeholder="Поиск по районам" 
+                                v-model="inputValue" 
+                                @click.stop       
+                            >
+                            <span v-if="inputValue" class="icon__close" @click="inputValue = ''"></span>
                         </div>
-                        <div class="select-dropdown__tags">
-                            <div class="tag__item">
-                                <p class="tag__item__title">Ново-Переделкино</p>
-                                <div class="tag__item__close"></div>
-                            </div>
-                            <div class="tag__item">
-                                <p class="tag__item__title">Перово</p>
-                                <div class="tag__item__close"></div>
-                            </div>
-                            <div class="tag__item">
-                                <p class="tag__item__title">Орехово-Матвеевское Северное и Южное</p>
-                                <div class="tag__item__close"></div>
+                        <div v-if="selectedItems.length" class="select-dropdown__tags">
+                            <div v-for="tag in selectedItems" class="tag__item" @click.stop>
+                                <p class="tag__item__title">{{ tag }}</p>
+                                <div class="tag__item__close" @click.stop="removeTag(tag)"></div>
                             </div>
                         </div>
                         <div class="select-dropdown__list">
-                            <label v-for="(disctrict, index) in districts" class="list__item" :key="index">
-                                <input type="checkbox" class="list__item__chechbox" value="{{ disctrict }}">
+                            <label v-for="disctrict in filteredDistricts" 
+                                    class="list__item"
+                                    :class="{disabled: !disctrict.enable}" 
+                                    :key="disctrict.id"
+                            >
+                                <input type="checkbox" 
+                                    class="list__item__chechbox" 
+                                    value="disctrict.name" 
+                                    @change="itemLabelCheck(disctrict)"
+                                    :checked="selectedItems.includes(disctrict.name)"
+                                >
                                 <span class="list__item__box"></span>
-                                <span class="list__item__value">{{ disctrict }}</span>
+                                <span class="list__item__value" 
+                                        :class="{formated: inputValue}"
+                                        v-html="wrapWord(disctrict.name, inputValue)"></span>
                             </label>
                         </div>
                     </div>

@@ -71,6 +71,7 @@ html,body {
 .select__text {
     color: #B7B7B7;
     position: relative;
+    padding-right: 15px;
 }
 
 .select__text::after {
@@ -116,7 +117,7 @@ html,body {
     border-radius: 4px 4px 0 0;
     width: 100%;
     outline: none;
-    padding: 14px 18px 14px 38px;
+    padding: 14px 40px 14px 38px;
     color: #4E4E4E;
 }
 
@@ -205,6 +206,7 @@ html,body {
     background: #B7B7B7;
 }
 
+.list__item__value.formated,
 .list__item.disabled .list__item__value {
     color: #B7B7B7;
 }
@@ -238,6 +240,7 @@ html,body {
     background: #A180C1;
 }
 
+.select__text,
 .tag__item__title {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -268,4 +271,9 @@ html,body {
     top: 19.33px;
     right: 21.33px;
     cursor: pointer;
+}
+
+i.highlighted {
+    font-style: normal;
+    color: #4E4E4E;
 }
